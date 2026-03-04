@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Produk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-br from-green-100 via-emerald-50 to-teal-100 min-h-screen font-sans">
+
+<!-- Navbar -->
+<nav class="bg-white shadow-md px-8 py-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold text-emerald-700">Spring MVC Lab</h1>
+    <div class="space-x-6 font-semibold">
+        <a href="#" class="text-emerald-600 hover:text-emerald-800">Home</a>
+        <a href="#" class="text-emerald-600 hover:text-emerald-800">Produk</a>
+        <a href="#" class="text-emerald-600 hover:text-emerald-800">About</a>
+        <a href="#" class="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition">Login</a>
+    </div>
+</nav>
+
+<!-- Container -->
+<div class="max-w-6xl mx-auto p-8">
+
+    <!-- Judul -->
+    <h2 class="text-4xl font-bold text-gray-800 mb-6">Daftar Produk</h2>
+
+    <!-- Search -->
+    <div class="flex mb-6">
+        <input type="text"
+               placeholder="Cari produk..."
+               class="flex-1 px-4 py-2 border border-emerald-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-emerald-400">
+        <button class="px-6 bg-emerald-500 text-white font-semibold rounded-r-lg hover:bg-emerald-600 transition">
+            Cari
+        </button>
+    </div>
+
+    <!-- Filter -->
+    <div class="mb-4 space-x-3">
+        <span class="font-semibold text-gray-700">Filter:</span>
+        <a href="#" class="px-4 py-1 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400">Semua</a>
+        <a href="#" class="px-4 py-1 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600">Elektronik</a>
+        <a href="#" class="px-4 py-1 bg-green-500 text-white rounded-lg hover:bg-green-600">Buku</a>
+        <a href="#" class="px-4 py-1 bg-teal-500 text-white rounded-lg hover:bg-teal-600">Makanan</a>
+    </div>
+
+    <p class="mb-4 text-gray-600">
+        Menampilkan <span th:text="${#lists.size(allProducts)}">0</span> produk
+    </p>
+
+    <!-- Tabel Produk -->
+    <div class="overflow-x-auto bg-white shadow-lg rounded-xl">
+        <table class="min-w-full text-left">
+            <thead class="bg-emerald-700 text-white">
+            <tr>
+                <th class="px-6 py-3">No</th>
+                <th class="px-6 py-3">Nama Produk</th>
+                <th class="px-6 py-3">Kategori</th>
+                <th class="px-6 py-3">Harga</th>
+                <th class="px-6 py-3">Stok</th>
+                <th class="px-6 py-3">Aksi</th>
+            </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+            <tr th:each="p, stat : ${allProducts}"
+                class="hover:bg-emerald-50 transition">
+
+                <td class="px-6 py-4" th:text="${stat.index + 1}">1</td>
+
+                <td class="px-6 py-4 font-semibold"
+                    th:text="${p.name}">
+                    Nama Produk
+                </td>
+
+                <td class="px-6 py-4 text-emerald-600 font-medium"
+                    th:text="${p.category}">
+                    Kategori
+                </td>
+
+                <td class="px-6 py-4"
+                    th:text="'Rp ' + ${#numbers.formatInteger(p.price, 0, 'POINT')}">
+                    Rp 0
+                </td>
+
+                <td class="px-6 py-4 font-bold"
+                    th:text="${p.stock}"
+                    th:classappend="${p.stock < 20} ? 'text-red-500' : 'text-green-600'">
+                    0
+                </td>
+
+                <td class="px-6 py-4">
+                    <a href="#"
+                       class="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition">
+                        Detail
+                    </a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="text-center py-6 text-gray-600">
+    Spring MVC Lab © 2026 | Aplikasi Web Mid Semester
+</footer>
+
+</body>
+</html>

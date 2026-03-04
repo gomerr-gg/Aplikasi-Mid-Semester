@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- Fragment: Navbar -->
+<!-- Menambahkan 'pt-16' pada body di halaman utama agar konten tidak tertutup navbar fixed -->
+<nav th:fragment="navbar" class="fixed w-full top-0 z-50 shadow-md bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-4">
+    <div class="container mx-auto flex justify-between items-center">
+
+        <!-- Logo / Brand -->
+        <a th:href="@{/}" class="text-2xl font-extrabold tracking-wide hover:text-green-100 transition duration-300 flex items-center gap-2">Spring MVC Lab
+        </a>
+
+        <!-- Menu Navigasi -->
+        <div class="hidden md:flex space-x-8">
+            <a th:href="@{/}"
+               class="font-semibold hover:text-green-200 transition duration-300 transform hover:scale-105 px-3 py-1 rounded-lg hover:bg-white/10">
+                Home
+            </a>
+            <a th:href="@{/products}"
+               class="font-semibold hover:text-green-200 transition duration-300 transform hover:scale-105 px-3 py-1 rounded-lg hover:bg-white/10">
+                Produk
+            </a>
+            <a th:href="@{/about}"
+               class="font-semibold hover:text-green-200 transition duration-300 transform hover:scale-105 px-3 py-1 rounded-lg hover:bg-white/10">
+                About
+            </a>
+        </div>
+
+        <!-- Tombol Login/Admin (Contoh opsional) -->
+        <div class="hidden md:block">
+            <a href="#" class="text-sm font-bold bg-white text-emerald-600 px-4 py-2 rounded-full hover:bg-green-100 transition shadow-sm">
+                Login
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!-- Fragment: Footer -->
+<footer th:fragment="footer" class="w-full bg-emerald-50 border-t border-emerald-200 text-emerald-800 py-6 mt-auto">
+    <div class="container mx-auto text-center">
+        <p class="text-sm font-medium opacity-90">
+            Spring MVC Lab &copy; 2026 | Aplikasi Web Mid Semester
+        </p>
+        <p class="text-xs text-emerald-500 mt-1">
+            Theme: Emerald & Teal
+        </p>
+    </div>
+</footer>
+
+</html>

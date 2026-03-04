@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>About - Spring MVC Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<!-- Background: Gradasi Hijau Muda yang Santai -->
+<body class="bg-gradient-to-br from-green-100 via-emerald-50 to-teal-100 min-h-screen flex items-center justify-center p-6 font-sans">
+
+<!-- Kartu Utama -->
+<div class="bg-white/90 backdrop-blur rounded-3xl shadow-2xl max-w-2xl w-full p-8 md:p-12 relative overflow-hidden">
+
+    <!-- Strip Atas: Gradasi Hijau -->
+    <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-400 to-teal-400"></div>
+
+    <!-- Judul Aplikasi -->
+    <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-600 mb-6 text-center" th:text="${appName}">
+        App Name
+    </h1>
+
+    <div class="border-t border-gray-200 my-6"></div>
+
+    <!-- Informasi Versi dan Author -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <!-- Kotak Version -->
+        <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 flex items-center gap-3">
+            <div class="bg-emerald-500 text-white p-2 rounded-lg"></div>
+            <div>
+                <p class="text-xs text-emerald-500 font-bold uppercase tracking-wide">Version</p>
+                <p class="text-lg font-bold text-gray-800" th:text="${version}">1.0</p>
+            </div>
+        </div>
+
+        <!-- Kotak Author -->
+        <div class="bg-teal-50 p-4 rounded-xl border border-teal-100 flex items-center gap-3">
+            <div class="bg-teal-500 text-white p-2 rounded-lg">👤</div>
+            <div>
+                <p class="text-xs text-teal-500 font-bold uppercase tracking-wide">Author</p>
+                <p class="text-lg font-bold text-gray-800" th:text="${author}">Nama</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Daftar Teknologi -->
+    <h3 class="text-xl font-bold text-gray-700 mb-4 flex items-center gap-2">Technologies Used:
+    </h3>
+    <div class="flex flex-wrap gap-3 mb-8">
+            <span th:each="tech : ${technologies}"
+                  class="px-4 py-2 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-emerald-500 to-teal-500 shadow-md hover:shadow-lg transform hover:-translate-y-1 transition cursor-default">
+                <span th:text="${tech}">Tech</span>
+            </span>
+    </div>
+
+    <!-- Tombol Kembali -->
+    <div class="text-center mt-8">
+        <a th:href="@{/products}"
+           class="inline-flex items-center justify-center px-8 py-3 text-base font-bold text-white transition-all duration-200 bg-emerald-600 rounded-full hover:bg-emerald-700 hover:shadow-lg hover:scale-105 focus:outline-none">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            Back to Products
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

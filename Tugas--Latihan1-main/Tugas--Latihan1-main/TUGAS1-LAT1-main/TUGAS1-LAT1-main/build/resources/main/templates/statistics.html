@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Statistik Produk</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<!-- Background: Gradasi Hijau Muda -->
+<body class="bg-gradient-to-br from-green-100 via-emerald-50 to-teal-100 min-h-screen flex flex-col font-sans text-gray-700">
+
+<!-- Navbar Fragment -->
+<div th:replace="~{fragments/layout :: navbar}"></div>
+
+<!-- Main Content -->
+<main class="container mx-auto px-4 py-12 flex-grow">
+
+    <!-- Kartu Utama -->
+    <div class="bg-white/90 backdrop-blur rounded-3xl shadow-xl overflow-hidden max-w-4xl mx-auto">
+
+        <!-- Strip Atas -->
+        <div class="h-2 bg-gradient-to-r from-emerald-400 to-teal-400"></div>
+
+        <div class="p-8 md:p-10 space-y-8">
+
+            <!-- Header -->
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold text-gray-800">Statistik Inventori</h2>
+            </div>
+
+            <!-- Ringkasan Statistik (Grid Cards) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Total Produk -->
+                <div class="bg-emerald-50 p-6 rounded-2xl border border-emerald-100 text-center">
+                    <p class="text-sm text-emerald-600 font-bold uppercase tracking-wide mb-1">Total Produk</p>
+                    <p class="text-4xl font-extrabold text-emerald-700" th:text="${stats.totalProducts}">0</p>
+                </div>
+
+                <!-- Rata-rata Harga -->
+                <div class="bg-teal-50 p-6 rounded-2xl border border-teal-100 text-center">
+                    <p class="text-sm text-teal-600 font-bold uppercase tracking-wide mb-1">Rata-rata Harga</p>
+                    <p class="text-4xl font-extrabold text-teal-700" th:text="'Rp ' + ${#numbers.formatDecimal(stats.avgPrice, 0, 'POINT', 0, 'POINT')}">0</p>
+                </div>
+
+                <!-- Stok Menipis -->
+                <div class="bg-rose-50 p-6 rounded-2xl border border-rose-100 text-center">
+                    <p class="text-sm text-rose-600 font-bold uppercase tracking-wide mb-1">Stok Menipis</p>
+                    <p class="text-4xl font-extrabold text-rose-700" th:text="${stats.lowStockCount}">0</p>
+                </div>
+            </div>
+
+            <!-- Perbandingan Harga -->
+            <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+                <h4 class="text-xl font-bold text-gray-800 mb-4">Perbandingan Harga</h4>
+                <div class="flex flex-col md:flex-row justify-between gap-4 text-gray-600">
+                    <div class="flex items-center gap-2">
+                        <span class="text-green-500 font-bold">Termahal:</span>
+                        <span class="font-semibold" th:text="${stats.expensive.name + ' (Rp ' + stats.expensive.price + ')'}"></span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-red-500 font-bold">Termurah:</span>
+                        <span class="font-semibold" th:text="${stats.cheapest.name + ' (Rp ' + stats.cheapest.price + ')'}"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Per Kategori (Tabel) -->
+            <div>
+                <h4 class="text-xl font-bold text-gray-800 mb-4">Summary Per Kategori</h4>
+                <div class="overflow-hidden rounded-xl border border-gray-200">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                        <tr>
+                            <th class="py-3 px-6">Kategori</th>
+                            <th class="py-3 px-6 text-right">Jumlah Produk</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm">
+                        <tr th:each="entry : ${stats.categorySummary}" class="border-b border-gray-200 hover:bg-gray-50">
+                            <td class="py-3 px-6 font-medium" th:text="${entry.key}">Kategori</td>
+                            <td class="py-3 px-6 text-right font-bold text-emerald-600" th:text="${entry.value} + ' Produk'">0</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<!-- Footer Fragment -->
+<div th:replace="~{fragments/layout :: footer}"></div>
+
+</body>
+</html>
